@@ -10,13 +10,18 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mybookapp.ApiRequest;
 import com.example.mybookapp.R;
+
+import java.io.IOException;
 
 public class SearchFragment extends Fragment {
 
     private EditText editTextTitle;
     private EditText editTextAuthor;
     private EditText editTextISBN;
+
+    ApiRequest apiRequest;
 
     @Nullable
     @Override
@@ -28,12 +33,20 @@ public class SearchFragment extends Fragment {
         editTextAuthor = view.findViewById(R.id.editTextAuthor);
         editTextISBN = view.findViewById(R.id.editTextISBN);
 
-        view.findViewById(R.id.buttonSearch).setOnClickListener(v -> onSearchClicked());
+        apiRequest = new ApiRequest();
+
+        view.findViewById(R.id.buttonSearch).setOnClickListener(v -> {
+            try {
+                onSearchClicked();
+            } catch (IOException e) {
+                Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
 
-    public void onSearchClicked() {
+    public void onSearchClicked() throws IOException {
         String title = editTextTitle.getText().toString().trim();
         String author = editTextAuthor.getText().toString().trim();
         String isbn = editTextISBN.getText().toString().trim();
@@ -47,7 +60,8 @@ public class SearchFragment extends Fragment {
             if (!isbn.isEmpty()) message += "ISBN: " + isbn;
             Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
 
-
+            String response = apiRequest.makeConnection(title, author, isbn);
+            System.out.println("Response: " + response);
         }
     }
 }
