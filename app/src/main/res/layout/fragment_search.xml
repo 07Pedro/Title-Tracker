@@ -1,0 +1,171 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F4"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/appHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="App Icon"
+            android:src="@drawable/ic_library_books" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book Finder"
+            android:textSize="24sp"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:typeface="serif" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book Title"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginTop="24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:elevation="4dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_book_title"
+            android:contentDescription="Book Icon"
+            android:layout_marginEnd="12dp" />
+
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:hint="Enter Book Title"
+            android:inputType="text"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:background="@android:color/white"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="16sp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:elevation="4dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_author"
+            android:contentDescription="Author Icon"
+            android:layout_marginEnd="12dp" />
+
+        <EditText
+            android:id="@+id/editTextAuthor"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:hint="Enter Author"
+            android:inputType="text"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:background="@android:color/white"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="16sp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewISBN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISBN"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:elevation="4dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_isbn_code"
+            android:contentDescription="ISBN Icon"
+            android:layout_marginEnd="12dp" />
+
+        <EditText
+            android:id="@+id/editTextISBN"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:hint="Enter ISBN"
+            android:inputType="number"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:background="@android:color/white"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="16sp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Book"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF6F61"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
