@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.mybookapp.ApiRequest;
+import com.example.mybookapp.apiRequest.ApiRequest;
 import com.example.mybookapp.R;
 
 import java.io.IOException;
@@ -60,8 +60,7 @@ public class SearchFragment extends Fragment {
             if (!isbn.isEmpty()) message += "ISBN: " + isbn;
             Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
 
-            String response = apiRequest.makeConnection(title, author, isbn);
-            System.out.println("Response: " + response);
+            apiRequest.makeConnectionAsync(title, author, isbn);
         }
     }
 }
