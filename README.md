@@ -26,4 +26,3 @@
 
 2. **Fetch Results**  
    The app sends an API request to **Open Library** and fetches the relevant book data.  
-
