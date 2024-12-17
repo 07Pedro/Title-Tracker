@@ -1,9 +1,12 @@
 package com.example.mybookapp.apiRequest;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.example.mybookapp.parsing.Book;
 import com.example.mybookapp.parsing.BookParser;
 
-import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
@@ -14,32 +17,50 @@ import java.util.List;
 
 public class ApiRequest {
 
+    public interface OnBooksFetchedListener {
+        void onBooksFetched(List<Book> books);
+    }
+    private OnBooksFetchedListener booksFetchedListener;
+    public void setOnBooksFetchedListener(OnBooksFetchedListener listener) {
+        this.booksFetchedListener = listener;
+    }
+
     public void makeConnectionAsync(String title, String author, String isbn) {
         new Thread(() -> {
             try {
-                String apiUrl = buildURL(title, author, isbn);
-                System.out.println("API URL: " + apiUrl);
+                // Fetch the API response as a Reader
+                Reader apiResponseReader = fetchApiResponse(title, author, isbn);
 
-                URL url = new URL(apiUrl);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.connect();
-
-                int responseCode = conn.getResponseCode();
-                if (responseCode != 200) {
-                    throw new RuntimeException("HttpResponseCode: " + responseCode);
+                if (apiResponseReader == null) {
+                    System.err.println("API response is null. Cannot parse books.");
+                    return;
                 }
 
-                try (BufferedReader responseReader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
-                    List<Book> books = BookParser.parseBooks(responseReader);
+                // Parse the books from the API response
+                List<Book> books = BookParser.parseBooks(apiResponseReader);
 
-                    handleBooks(books);
-                }
-
-            } catch (Exception e) {
+                // Handle the parsed books (e.g., display them in the UI)
+                handleBooks(books);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
+    }
+    private Reader fetchApiResponse(String title, String author, String isbn) throws IOException {
+        String apiUrl = buildURL(title, author, isbn);
+        System.out.println("API URL: " + apiUrl);
+
+        URL url = new URL(apiUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.connect();
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200) {
+            throw new RuntimeException("HttpResponseCode: " + responseCode);
+        }
+
+        return new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);
     }
 
 
@@ -75,11 +96,16 @@ public class ApiRequest {
     }
 
     private void handleBooks(List<Book> books) {
-        if (books.isEmpty()) {
-            System.out.println("No books found.");
-        } else {
-            System.out.println("Handling Books: " + books.size());
-            books.forEach(System.out::println);
+        if (booksFetchedListener != null) {
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (books.isEmpty()) {
+                    System.out.println("No books found.");
+                } else {
+                    System.out.println("Handling Books: " + books.size());
+                    books.forEach(System.out::println);
+                }
+                booksFetchedListener.onBooksFetched(books);
+            });
         }
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp" >
+
+    <!-- Book Image -->
+    <ImageView
+        android:id="@+id/imageViewBookCover"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:contentDescription="Book Image" />
+
+    <!-- Table Structure for Book Data -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+
+        <TableRow>
+            <TextView
+                android:text="Title:"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:text="Title Placeholder" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Author:"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/textViewAuthor"
+                android:text="Author Placeholder" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="First Published:"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/textViewFirstPublishYear"
+                android:text="Year Placeholder" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="ISBN:"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/textViewISBN"
+                android:text="ISBN Placeholder" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

@@ -168,4 +168,12 @@
         android:backgroundTint="#FF6F61"
         android:layout_marginTop="24dp"
         android:layout_gravity="center_horizontal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewBooks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_isbn_code" />
+
 </LinearLayout>
