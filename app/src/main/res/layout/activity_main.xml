@@ -10,10 +10,10 @@
     <!-- Fragment container -->
     <LinearLayout
         android:id="@+id/appHeader"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:background="#DFDFDF"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -24,27 +24,39 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
+            android:id="@+id/titleBook"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/ic_library_books"
-            android:contentDescription="App Icon" />
+            android:contentDescription="App Icon"
+            android:clipToPadding="true" />
 
         <TextView
             android:id="@+id/mainTextViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Book Finder"
+            android:text="TitleTracker"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:gravity="center"
             android:textColor="#000000"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            android:gravity="center" />
 
+    <TextView
+        android:id="@+id/textViewSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Your Next Adventure"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:layout_below="@id/appHeader"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
     </LinearLayout>
 
     <FrameLayout
