@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mybookapp.R;
 import com.example.mybookapp.apiRequest.ApiRequest;
-import com.example.mybookapp.booklist.BookListFragment;
 import com.example.mybookapp.parsing.Book;
 
 import java.util.List;

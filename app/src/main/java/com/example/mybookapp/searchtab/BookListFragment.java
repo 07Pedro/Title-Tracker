@@ -1,4 +1,4 @@
-package com.example.mybookapp.booklist;
+package com.example.mybookapp.searchtab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mybookapp.R;
 import com.example.mybookapp.parsing.Book;
-import com.example.mybookapp.searchtab.BookAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +44,16 @@ public class BookListFragment extends Fragment {
         bookAdapter = new BookAdapter();
         recyclerViewBooks.setAdapter(bookAdapter);
 
-        // Retrieve and set books
         if (getArguments() != null) {
             List<Book> books = (List<Book>) getArguments().getSerializable(ARG_BOOK_LIST);
             bookAdapter.setBooks(books);
         }
+
+        // Back Button functionality
+        View buttonBack = view.findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager().popBackStack();
+        });
 
         return view;
     }

@@ -1,34 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F4F4"
+    android:background="#DFDFDF"
     android:orientation="vertical"
     android:padding="16dp">
-
-    <LinearLayout
-        android:id="@+id/appHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="App Icon"
-            android:src="@drawable/ic_library_books" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Book Finder"
-            android:textSize="24sp"
-            android:textColor="#333333"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:typeface="serif" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textViewTitle"
