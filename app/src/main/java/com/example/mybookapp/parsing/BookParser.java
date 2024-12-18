@@ -29,12 +29,14 @@ public class BookParser {
                             bookNode.get("title").asText() : "Unknown Title";
                     String subject = bookNode.has("subject") ?
                             bookNode.get("subject").toString() : "No Subject";
-                    String isbn = bookNode.has("isbn") ?
-                            bookNode.get("isbn").toString() : null;
+                    String leadingISBN = null;
+                    if (bookNode.has("isbn") && bookNode.get("isbn").isArray() && !bookNode.get("isbn").isEmpty()) {
+                        leadingISBN = bookNode.get("isbn").get(0).asText();
+                    }
                     String firstSentence = bookNode.has("first_sentence") ?
                             bookNode.get("first_sentence").toString() : null;
 
-                    books.add(new Book(authorAlternativeName, authorName, firstPublishYear, title, subject, isbn, firstSentence));
+                    books.add(new Book(authorAlternativeName, authorName, firstPublishYear, title, subject, leadingISBN, firstSentence));
                 }
             }
         } catch (Exception e) {
