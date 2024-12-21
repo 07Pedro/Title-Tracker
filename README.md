@@ -1,6 +1,6 @@
 # **Title Tracker**
 
-**MyBookApp** is an intuitive and user-friendly Android application designed to help users search for books seamlessly. Powered by the **Open Library API**, the app allows users to search for books by title, author, or ISBN and displays detailed information about each book, including the author, publication year, and other essential metadata.
+**Title Tracker** is an intuitive and user-friendly Android application designed to help users search for books seamlessly. Powered by the **Open Library API**, the app allows users to search for books by title, author, or ISBN and displays detailed information about each book, including the author, publication year, and other essential metadata.
 
 ---
 
