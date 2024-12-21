@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mybookapp.R;
 import com.example.mybookapp.parsing.Book;
+import com.example.mybookapp.parsing.CoverParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         boolean isExpanded = position == expandedPosition;
         holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
-        // Item click listener for expanding/collapsing
+        // Get the book cover URL
+        String isbn = book.getIsbn();
+        String coverUrl = CoverParser.getBookCoverUrl(isbn);
+
+        // Use CoverParser to load the image
+        if (coverUrl != null) {
+            CoverParser.loadBookCover(coverUrl, holder.imageViewBookCover);
+        } else {
+            holder.imageViewBookCover.setImageResource(R.drawable.placeholder); // Fallback if no cover URL
+        }
+
         holder.itemView.setOnClickListener(v -> {
             int previousExpandedPosition = expandedPosition;
             expandedPosition = isExpanded ? -1 : position;
@@ -85,4 +96,3 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         }
     }
 }
-

@@ -24,9 +24,12 @@ public class Book {
     @JsonProperty("first_sentence")
     private String firstSentence;
 
+    @JsonProperty("book_Cover")
+    private String bookCoverUrl;
+
     // Constructor
     public Book(String authorAlternativeName, String authorName, int firstPublishYear,
-                String title, String subject, String isbn, String firstSentence) {
+                String title, String subject, String isbn, String firstSentence, String bookCoverUrl) {
         this.authorAlternativeName = authorAlternativeName;
         this.authorName = authorName;
         this.firstPublishYear = firstPublishYear;
@@ -34,6 +37,7 @@ public class Book {
         this.subject = subject;
         this.isbn = isbn;
         this.firstSentence = firstSentence;
+        this.bookCoverUrl = bookCoverUrl;
     }
 
     // Getters and setters
@@ -65,6 +69,10 @@ public class Book {
         return firstSentence;
     }
 
+    public String getBookCoverUrl() {
+        return bookCoverUrl;
+    }
+
     @Override
     public String toString() {
         return "Book: " + title + "\n" +
@@ -72,6 +80,7 @@ public class Book {
                 "Genre: " + subject + "\n" +
                 "First Published: " + firstPublishYear + "\n" +
                 "ISBN: " + isbn + "\n" +
-                "First Sentence: " + firstSentence;
+                "First Sentence: " + firstSentence + "\n" +
+                "BookCoverUrl: " + bookCoverUrl + '\'';
     }
 }

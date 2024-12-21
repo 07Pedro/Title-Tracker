@@ -46,13 +46,22 @@ public class BookParser {
                         }
                     }
 
-                    books.add(new Book(authorAlternativeName, authorName, firstPublishYear, title, randomSubjects, leadingISBN, firstSentence));
+                    String bookCoverUrl = generateBookCoverUrl(leadingISBN);
+
+                    books.add(new Book(authorAlternativeName, authorName, firstPublishYear, title, randomSubjects, leadingISBN, firstSentence, bookCoverUrl));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return books;
+    }
+
+    private static String generateBookCoverUrl(String isbn) {
+        if (isbn != null && !isbn.isEmpty()) {
+            return "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg";
+        }
+        return null;
     }
 
     private static String selectRandomSubjects(List<String> subjects, int limit) {
