@@ -1,9 +1,11 @@
-package com.example.mybookapp.searchtab;
+package com.example.mybookapp.saves;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     private List<Book> books = new ArrayList<>();
     private int expandedPosition = -1; // Tracks the expanded item position
+    private BookRepository bookRepository;
+
+    public BookAdapter(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     public void setBooks(List<Book> books) {
         this.books = books;
@@ -43,7 +50,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.textViewAuthor.setText(book.getAuthorName() != null ? "Author: " + book.getAuthorName() : "Author: N/A");
         holder.textViewFirstPublishYear.setText(book.getFirstPublishYear() != 0 ? "Year: " + book.getFirstPublishYear() : "Year: N/A");
 
-        // Expanded content
+        // Set expanded content
         holder.textViewSubject.setText(book.getSubject() != null ? "Subject: " + book.getSubject() : "Subject: N/A");
         holder.textViewFirstSentence.setText(book.getFirstSentence() != null ? "First Sentence: " + book.getFirstSentence() : "First Sentence: N/A");
         holder.textViewISBN.setText(book.getIsbn() != null ? "ISBN: " + book.getIsbn() : "ISBN: N/A");
@@ -63,6 +70,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             holder.imageViewBookCover.setImageResource(R.drawable.placeholder); // Fallback if no cover URL
         }
 
+        // Handle the Save button logic
+        holder.buttonSaveBook.setOnClickListener(v -> {
+            bookRepository.saveBook(book);
+        });
+
         holder.itemView.setOnClickListener(v -> {
             int previousExpandedPosition = expandedPosition;
             expandedPosition = isExpanded ? -1 : position;
@@ -81,7 +93,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         TextView textViewTitle, textViewAuthor, textViewFirstPublishYear;
         TextView textViewSubject, textViewFirstSentence, textViewISBN;
         ImageView imageViewBookCover;
-        View expandedLayout;
+        Button buttonSaveBook;
+        LinearLayout expandedLayout;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +106,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             textViewFirstSentence = itemView.findViewById(R.id.textViewFirstSentence);
             textViewISBN = itemView.findViewById(R.id.textViewISBN);
             expandedLayout = itemView.findViewById(R.id.expandedLayout);
+            buttonSaveBook = itemView.findViewById(R.id.buttonSaveBook);
         }
     }
 }

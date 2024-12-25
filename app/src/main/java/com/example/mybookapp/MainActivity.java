@@ -14,12 +14,14 @@ import androidx.fragment.app.Fragment;
 import com.example.mybookapp.animation.titleAnimations;
 import com.example.mybookapp.home.HomeFragment;
 import com.example.mybookapp.searchtab.SearchFragment;
+import com.example.mybookapp.saves.SaveFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private Fragment homeFragment = new HomeFragment();
     private Fragment searchFragment = new SearchFragment();
+    private Fragment saveFragment = new SaveFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         bottomNav.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment =
-                    item.getItemId() == R.id.nav_home ? homeFragment : searchFragment;
-            loadFragment(selectedFragment);
+            Fragment selectedFragment = null;
+
+            if (item.getItemId() == R.id.nav_home) {
+                selectedFragment = homeFragment;
+            } else if (item.getItemId() == R.id.nav_search) {
+                selectedFragment = searchFragment;
+            } else if (item.getItemId() == R.id.nav_save) {
+                selectedFragment = saveFragment;
+            }
+
+            if (selectedFragment != null) {
+                loadFragment(selectedFragment);
+            }
+
             return true;
         });
     }
