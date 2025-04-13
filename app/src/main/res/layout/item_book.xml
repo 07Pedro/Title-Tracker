@@ -75,14 +75,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonSaveBook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
             android:layout_marginTop="8dp"
             android:layout_gravity="end"
-            android:src="@drawable/ic_bookmark_empty"/>
+            android:src="@drawable/ic_bookmark_empty"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Save Book" />
+
 
     </LinearLayout>
 
