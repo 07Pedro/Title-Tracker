@@ -1,12 +1,10 @@
-package com.example.mybookapp.saves;
+package com.example.mybookapp.searchtab;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mybookapp.R;
 import com.example.mybookapp.parsing.Book;
 import com.example.mybookapp.parsing.CoverParser;
+import com.example.mybookapp.saves.BookRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,11 +59,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
         // Get the book cover URL
-        String isbn = book.getIsbn();
-        String coverUrl = CoverParser.getBookCoverUrl(isbn);
+        String coverUrl = book.getBookCoverUrl();
 
         // Use CoverParser to load the image
         if (coverUrl != null) {
+            Log.d("Cover Check", "Cover URL: " + coverUrl); // Log URL to check
             CoverParser.loadBookCover(coverUrl, holder.imageViewBookCover);
         } else {
             holder.imageViewBookCover.setImageResource(R.drawable.placeholder); // Fallback if no cover URL
@@ -93,7 +92,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         TextView textViewTitle, textViewAuthor, textViewFirstPublishYear;
         TextView textViewSubject, textViewFirstSentence, textViewISBN;
         ImageView imageViewBookCover;
-        Button buttonSaveBook;
+        ImageButton buttonSaveBook;  // Changed to ImageButton if it's an ImageButton
         LinearLayout expandedLayout;
 
         public BookViewHolder(@NonNull View itemView) {
@@ -106,7 +105,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             textViewFirstSentence = itemView.findViewById(R.id.textViewFirstSentence);
             textViewISBN = itemView.findViewById(R.id.textViewISBN);
             expandedLayout = itemView.findViewById(R.id.expandedLayout);
-            buttonSaveBook = itemView.findViewById(R.id.buttonSaveBook);
+            buttonSaveBook = itemView.findViewById(R.id.buttonSaveBook);  // Make sure this matches your layout (ImageButton or Button)
         }
     }
 }

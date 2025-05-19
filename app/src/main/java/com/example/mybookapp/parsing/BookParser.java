@@ -20,35 +20,27 @@ public class BookParser {
 
             if (docsNode != null && docsNode.isArray()) {
                 for (JsonNode bookNode : docsNode) {
-                    String authorAlternativeName = bookNode.has("author_alternative_name") ?
-                            bookNode.get("author_alternative_name").toString() : null;
+                    // Extracting author_name from the new array format
                     String authorName = bookNode.has("author_name") ?
                             bookNode.get("author_name").get(0).asText() : null;
+
+                    // Extracting other fields as before
                     int firstPublishYear = bookNode.has("first_publish_year") ?
                             bookNode.get("first_publish_year").asInt() : -1;
                     String title = bookNode.has("title") ?
                             bookNode.get("title").asText() : "Unknown Title";
-                    List<String> subjectList = new ArrayList<>();
-                    if (bookNode.has("subject") && bookNode.get("subject").isArray()) {
-                        bookNode.get("subject").forEach(node -> subjectList.add(node.asText()));
-                    }
-                    String randomSubjects = selectRandomSubjects(subjectList, 3);
 
+                    // Extracting ISBNs from the "isbn" array (or handling any other available ISBN keys)
                     String leadingISBN = null;
                     if (bookNode.has("isbn") && bookNode.get("isbn").isArray() && !bookNode.get("isbn").isEmpty()) {
                         leadingISBN = bookNode.get("isbn").get(0).asText();
                     }
-                    String firstSentence = null;
-                    if (bookNode.has("first_sentence") && bookNode.get("first_sentence").isArray()) {
-                        JsonNode firstSentenceNode = bookNode.get("first_sentence").get(0);
-                        if (firstSentenceNode != null) {
-                            firstSentence = firstSentenceNode.asText();
-                        }
-                    }
 
-                    String bookCoverUrl = generateBookCoverUrl(leadingISBN);
+                    // Extracting book cover URL using the "cover_i" field (which is a cover ID)
+                    String bookCoverUrl = generateBookCoverUrlFromCoverId(bookNode);
 
-                    books.add(new Book(authorAlternativeName, authorName, firstPublishYear, title, randomSubjects, leadingISBN, firstSentence, bookCoverUrl));
+                    // Adding the parsed book data to the list
+                    books.add(new Book(null, authorName, firstPublishYear, title, null, leadingISBN, null, bookCoverUrl));
                 }
             }
         } catch (Exception e) {
@@ -57,21 +49,11 @@ public class BookParser {
         return books;
     }
 
-    private static String generateBookCoverUrl(String isbn) {
-        if (isbn != null && !isbn.isEmpty()) {
-            return "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg";
+    private static String generateBookCoverUrlFromCoverId(JsonNode bookNode) {
+        if (bookNode.has("cover_i")) {
+            int coverId = bookNode.get("cover_i").asInt();
+            return "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg";
         }
         return null;
-    }
-
-    private static String selectRandomSubjects(List<String> subjects, int limit) {
-        if (subjects == null || subjects.isEmpty()) {
-            return "No Subject";
-        }
-        Collections.shuffle(subjects);
-        return subjects.stream()
-                .limit(limit)
-                .reduce((s1, s2) -> s1 + ", " + s2)
-                .orElse("No Subject");
     }
 }

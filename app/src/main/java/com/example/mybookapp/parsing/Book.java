@@ -32,12 +32,11 @@ public class Book {
     @JsonProperty("first_sentence")
     private String firstSentence;
 
-    @JsonProperty("book_Cover")
-    private String bookCoverUrl;
-
+    @JsonProperty("cover_i")
+    private String coverId;
 
     public Book(String authorAlternativeName, String authorName, int firstPublishYear,
-                String title, String subject, String isbn, String firstSentence, String bookCoverUrl) {
+                String title, String subject, String isbn, String firstSentence, String coverId) {
         this.authorAlternativeName = authorAlternativeName;
         this.authorName = authorName;
         this.firstPublishYear = firstPublishYear;
@@ -45,7 +44,7 @@ public class Book {
         this.subject = subject;
         this.isbn = isbn;
         this.firstSentence = firstSentence;
-        this.bookCoverUrl = bookCoverUrl;
+        this.coverId = coverId;
     }
 
     // Getters and setters
@@ -114,11 +113,16 @@ public class Book {
     }
 
     public String getBookCoverUrl() {
-        return bookCoverUrl;
+        return coverId;
     }
 
-    public void setBookCoverUrl(String bookCoverUrl) {
-        this.bookCoverUrl = bookCoverUrl;
+
+    public void setCoverId(String coverId) {
+        this.coverId = coverId;
+    }
+
+    public String getCoverId() {
+        return coverId;
     }
 
     @Override
@@ -129,6 +133,6 @@ public class Book {
                 "First Published: " + firstPublishYear + "\n" +
                 "ISBN: " + isbn + "\n" +
                 "First Sentence: " + firstSentence + "\n" +
-                "BookCoverUrl: " + bookCoverUrl + '\'';
+                "CoverId: " + coverId;
     }
 }

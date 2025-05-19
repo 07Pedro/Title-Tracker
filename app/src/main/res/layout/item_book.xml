@@ -18,7 +18,8 @@
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:layout_marginEnd="10dp"
-            android:contentDescription="Book Cover"
+            android:visibility="visible"
+            android:contentDescription="@string/book_cover"
             android:src="@drawable/placeholder"/>
 
         <LinearLayout

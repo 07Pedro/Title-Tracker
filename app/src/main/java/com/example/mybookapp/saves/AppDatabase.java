@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.mybookapp.parsing.Book;
 
-@Database(entities = {Book.class}, version = 1)
+@Database(entities = {Book.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract BookDao bookDao();

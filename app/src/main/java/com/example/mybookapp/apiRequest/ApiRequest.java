@@ -91,6 +91,8 @@ public class ApiRequest {
         if (apiUrl.endsWith("&")) {
             apiUrl = apiUrl.substring(0, apiUrl.length() - 1);
         }
+        System.out.println("ISBN value: " + isbn);
+
 
         return apiUrl;
     }

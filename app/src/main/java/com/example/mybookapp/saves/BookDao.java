@@ -16,4 +16,7 @@ public interface BookDao {
 
     @Query("SELECT * FROM book")
     List<Book> getAllBooks();
+
+    @Query("DELETE FROM book WHERE id = :bookId")
+    void deleteBookById(int bookId);
 }

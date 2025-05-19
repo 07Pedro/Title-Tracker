@@ -40,4 +40,13 @@
         app:layout_constraintTop_toBottomOf="@id/textViewBookTitle"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@id/imageViewBookCover"
+            app:layout_constraintTop_toBottomOf="@id/textViewBookAuthor"
+            app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

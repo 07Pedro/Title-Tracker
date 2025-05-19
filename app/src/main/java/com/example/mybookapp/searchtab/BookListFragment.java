@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mybookapp.R;
 import com.example.mybookapp.parsing.Book;
-import com.example.mybookapp.saves.BookAdapter;
+import com.example.mybookapp.searchtab.BookAdapter;
 import com.example.mybookapp.saves.BookRepository;
 
 import java.util.ArrayList;

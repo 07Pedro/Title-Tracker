@@ -31,7 +31,8 @@ public class SaveFragment extends Fragment {
         recyclerViewSavedBooks = view.findViewById(R.id.recyclerViewSavedBooks);
         recyclerViewSavedBooks.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        savedBookAdapter = new SavedBookAdapter();
+        // Create the adapter with the repository
+        savedBookAdapter = new SavedBookAdapter(bookRepository);
         recyclerViewSavedBooks.setAdapter(savedBookAdapter);
 
         bookRepository = new BookRepository(getContext());
@@ -41,7 +42,7 @@ public class SaveFragment extends Fragment {
         return view;
     }
 
-    private void fetchSavedBooks() {
+    void fetchSavedBooks() {
         new Thread(() -> {
             List<Book> savedBooks = bookRepository.getAllBooks();
             getActivity().runOnUiThread(() -> {
